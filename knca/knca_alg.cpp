@@ -21,6 +21,14 @@ Stochastic k-neighborhood selection for supervised and unsupervised learning. IC
 #include <cstdlib>
 #include <cmath>
 
+#pragma once
+#include <stdlib.h>
+#ifdef _WIN32
+#define DLLEXPORT __declspec(dllexport)
+#else
+#define DLLEXPORT 
+#endif
+
 #define DEBUG_PTRS 0
 #define DEBUG_F1 0
 #define DEBUG_F2 0
@@ -181,7 +189,7 @@ void l1_backward(double *exp_node_pots, double *bmsgs, int K, int Nc, int Kp) {
 }
 
 extern "C" {
-  void infer(int N, int B, int K, int Kp, double *class_counts,
+    DLLEXPORT void infer(int N, int B, int K, int Kp, double *class_counts,
              int C, double *exp_node_pots, double *ys,
              double *fmsgs1, double *bmsgs1, double *fmsgs2, double *bmsgs2,
              double *result_margs, double *result_log_Zs) {
